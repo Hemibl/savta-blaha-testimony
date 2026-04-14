@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>דף עדות - אירנה (בלהה) בן-לביא</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #f0ebe3;
+    color: #1a1a1a;
+    padding: 40px 20px;
+    direction: rtl;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #fdf9f4;
+    border: 1px solid #c8b89a;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  }
+
+  .header {
+    background: #2c2016;
+    color: #f5e9d0;
+    padding: 28px 36px;
+    border-bottom: 4px solid #a07840;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .header-title h1 {
+    font-size: 26px;
+    letter-spacing: 1px;
+    color: #f5e9d0;
+    margin-bottom: 4px;
+  }
+
+  .header-title h2 {
+    font-size: 14px;
+    color: #c8a96e;
+    font-weight: normal;
+    letter-spacing: 2px;
+  }
+
+  .star-of-david {
+    font-size: 42px;
+    color: #c8a96e;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .interview-meta {
+    margin-top: 16px;
+    font-size: 12px;
+    color: #c8a96e;
+    border-top: 1px solid #4a3820;
+    padding-top: 12px;
+    display: flex;
+    gap: 32px;
+  }
+
+  .body {
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .section {
+    border-right: 4px solid #a07840;
+    padding-right: 16px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #a07840;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  /* Personal info grid */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 32px;
+  }
+
+  .info-item label {
+    display: block;
+    font-size: 10px;
+    color: #888;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+  }
+
+  .info-item .value {
+    font-size: 15px;
+    font-weight: bold;
+    color: #2c2016;
+  }
+
+  .info-item .sub {
+    font-size: 12px;
+    color: #666;
+    margin-top: 1px;
+  }
+
+  /* Family table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead tr {
+    background: #2c2016;
+    color: #f5e9d0;
+  }
+
+  thead th {
+    padding: 8px 12px;
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: normal;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #e8ddd0;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f7f2eb;
+  }
+
+  tbody tr.highlight {
+    background: #fef5e0;
+    font-weight: bold;
+  }
+
+  tbody td {
+    padding: 8px 12px;
+    vertical-align: middle;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  .tag.survived { background: #d4edda; color: #1a6632; }
+  .tag.murdered { background: #f8d7da; color: #7a1520; }
+  .tag.unknown  { background: #e2e3e5; color: #444; }
+  .tag.subject  { background: #fff3cd; color: #856404; }
+
+  /* Timeline */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 72px 16px 1fr;
+    gap: 0 14px;
+    align-items: stretch;
+    min-height: 44px;
+  }
+
+  .tl-year {
+    font-size: 13px;
+    font-weight: bold;
+    color: #a07840;
+    text-align: left;
+    padding-top: 4px;
+    direction: ltr;
+  }
+
+  .tl-line-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tl-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #a07840;
+    border: 2px solid #fdf9f4;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .tl-line {
+    width: 2px;
+    background: #ddd0bc;
+    flex: 1;
+  }
+
+  .tl-item:last-child .tl-line {
+    display: none;
+  }
+
+  .tl-text {
+    font-size: 13px;
+    color: #2c2016;
+    padding-bottom: 16px;
+    padding-top: 3px;
+  }
+
+  .tl-text strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 1px;
+  }
+
+  .tl-text .place {
+    color: #666;
+    font-size: 12px;
+  }
+
+  /* Camps */
+  .camps-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .camp-card {
+    background: #2c2016;
+    color: #f5e9d0;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .camp-card .camp-name {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #c8a96e;
+  }
+
+  .camp-card .camp-date {
+    color: #a08060;
+    font-size: 11px;
+  }
+
+  /* Story chapters */
+  .story-chapter {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ddd0bc;
+  }
+
+  .story-chapter:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .chapter-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #2c2016;
+    background: #f0e8d8;
+    padding: 5px 10px;
+    border-right: 3px solid #a07840;
+    margin-bottom: 10px;
+  }
+
+  .story-chapter p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .story-chapter p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Footer */
+  .footer {
+    background: #f0e8d8;
+    border-top: 1px solid #c8b89a;
+    padding: 14px 36px;
+    font-size: 11px;
+    color: #888;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="header-title">
+        <h2>דף עדות שואה</h2>
+        <h1>אירנה (בלהה) בן-לביא</h1>
+        <div style="font-size:13px; color:#c8a96e; margin-top:6px;">לידה: יורוביץ' | Irena Jurovitz</div>
+      </div>
+      <div class="star-of-david">✡</div>
+    </div>
+    <div class="interview-meta">
+      <span>📅 תאריך ראיון: 9 בספטמבר 1997</span>
+      <span>🎂 גיל בזמן הראיון: 78</span>
+      <span>📍 ראיון נוהל בישראל</span>
+      <span>🗣 שפה: עברית</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- PERSONAL INFO -->
+    <div class="section">
+      <div class="section-title">פרטים אישיים</div>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>שם לידה</label>
+          <div class="value">אירנה יורוביץ'</div>
+        </div>
+        <div class="info-item">
+          <label>שם לאחר נישואין</label>
+          <div class="value">בלהה בן-לביא</div>
+        </div>
+        <div class="info-item">
+          <label>תאריך לידה</label>
+          <div class="value">ספטמבר 1919</div>
+          <div class="sub">נולדה ביום כיפור - "אבא היה בבית הכנסת"</div>
+        </div>
+        <div class="info-item">
+          <label>מקום לידה</label>
+          <div class="value">סאטו מארה</div>
+          <div class="sub">רומניה (סופחה להונגריה ב-1940)</div>
+        </div>
+        <div class="info-item">
+          <label>בן/בת זוג</label>
+          <div class="value">בליק בן-לביא</div>
+          <div class="sub">נישאו 1945, בתנאי שיעלו לישראל</div>
+        </div>
+        <div class="info-item">
+          <label>ילדים</label>
+          <div class="value">יוסי (נולד אוגוסט 1948, איטליה), לאה (נולדה 1950)</div>
+          <div class="sub">יוסי נולד אוגוסט 1948 באיטליה, עלה לישראל בגיל 3 חודשים</div>
+        </div>
+        <div class="info-item">
+          <label>עלייה לישראל</label>
+          <div class="value">1948</div>
+          <div class="sub">ספינת פליטים לחיפה, התיישבה ליד רחובות</div>
+        </div>
+        <div class="info-item">
+          <label>מקצוע משפחת המוצא</label>
+          <div class="value">בעלי מאפייה</div>
+          <div class="sub">הופקעה בידי ההונגרים ב-1938</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARENTS -->
+    <div class="section">
+      <div class="section-title">הורים</div>
+      <table>
+        <thead>
+          <tr>
+            <th>שם</th>
+            <th>קשר</th>
+            <th>פרטים</th>
+            <th>גורל</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>אהרן יורוביץ'</strong></td>
+            <td>אב</td>
+            <td>תלמיד חכם, עזר במאפייה. גידל זקנו בכפייה ע"י ההונגרים</td>
+            <td><span class="tag murdered">נרצח</span></td>
+          </tr>
+          <tr>
+            <td><strong>ליה יורוביץ'</strong></td>
+            <td>אם</td>
+            <td>"אמא שאין בעולם" - ניהלה המאפייה והבית</td>
+            <td><span class="tag murdered">אושוויץ 1944</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SIBLINGS -->
+    <div class="section">
+      <div class="section-title">אחים ואחיות (11 ילדים)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>שם</th>
+            <th>מין</th>
+            <th>הערות</th>
+            <th>גורל</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>יואל</strong></td>
+            <td>בן</td>
+            <td>הבכור, נשוי עם 3 ילדים לפני המלחמה. ברח לרומניה. לאחר המלחמה מצא את האחים</td>
+            <td><span class="tag survived">שרד</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>אלזה</strong></td>
+            <td>בת</td>
+            <td>בעלה נשלח לעבודות כפייה באוקראינה ב-1940 ולא חזר</td>
+            <td><span class="tag unknown">לא ידוע</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>ציפורה</strong></td>
+            <td>בת</td>
+            <td></td>
+            <td><span class="tag unknown">לא ידוע</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>קלרה</strong></td>
+            <td>בת</td>
+            <td>נשואה. בעלה נשלח לאוקראינה ב-1940 ולא חזר</td>
+            <td><span class="tag unknown">לא ידוע</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>אלכס</strong></td>
+            <td>בן</td>
+            <td>נשלח לעבודות כפייה. לאחר המלחמה לבש מדי רוסים כדי לעבור גבולות ולמצוא את אחיותיו</td>
+            <td><span class="tag survived">שרד</span></td>
+          </tr>
+          <tr class="highlight">
+            <td>6</td>
+            <td><strong>אירנה (בלהה)</strong></td>
+            <td>בת</td>
+            <td>נושא העדות. נולדה ביום כיפור</td>
+            <td><span class="tag subject">המרואיינת</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>דינה</strong></td>
+            <td>בת</td>
+            <td>הייתה עם בלהה לאורך כל המחנות. הצילה את חייה בברגן-בלזן</td>
+            <td><span class="tag survived">שרדה</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>מרים</strong></td>
+            <td>בת</td>
+            <td>שרדה דרך תרזיינשטט. כותבת שירים עד היום</td>
+            <td><span class="tag survived">שרדה</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>קתרינה</strong></td>
+            <td>בת</td>
+            <td>שרדה, הייתה עם בלהה באושוויץ</td>
+            <td><span class="tag survived">שרדה</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>אריה</strong></td>
+            <td>בן</td>
+            <td>נמצא לאחר המלחמה במחנה. יואל יצא לחפשו ומצאו. אושפז בבית חולים יהודי בבודפשט</td>
+            <td><span class="tag survived">שרד</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><strong>ראובן</strong></td>
+            <td>בן</td>
+            <td>הצעיר</td>
+            <td><span class="tag survived">שרד</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:10px; font-size:11px; color:#888;">* יוסף מוזכר בתמלול כאח נוסף - ייתכן שמדובר בשם חלופי לאחד מהנ"ל עקב איכות הצליל</div>
+    </div>
+
+    <!-- CAMPS -->
+    <div class="section">
+      <div class="section-title">מקומות כליאה ומחנות</div>
+      <div class="camps-grid">
+        <div class="camp-card">
+          <div class="camp-name">גטו ברקוב</div>
+          <div class="camp-date">פסח אפריל 1944</div>
+          <div style="margin-top:6px; font-size:11px;">שבוע. בית חרושת לבלוקים. מרק סלק פעם ביום, לחם ליומיים.</div>
+        </div>
+        <div class="camp-card">
+          <div class="camp-name">גטו סטמר</div>
+          <div class="camp-date">אפריל-יוני 1944</div>
+          <div style="margin-top:6px; font-size:11px;">כמה שבועות. בתי יהודים ובית הכנסת. התפללו בחשאי תחת שמירה.</div>
+        </div>
+        <div class="camp-card">
+          <div class="camp-name">אושוויץ-בירקנאו</div>
+          <div class="camp-date">קיץ 1944</div>
+          <div style="margin-top:6px; font-size:11px;">הגיעה ברכבת בהמה, יומיים. הסלקציה - ניפרדה מהוריה לעד. שלוש פעמים ליד הקרמטוריום.</div>
+        </div>
+        <div class="camp-card">
+          <div class="camp-name">ברגן-בלזן</div>
+          <div class="camp-date">1944 - אפריל 1945</div>
+          <div style="margin-top:6px; font-size:11px;">חלתה קשות. בשחרור - הושלכה בין הגוויות. אחותה דינה הצילה אותה. 5 חודשי אשפוז.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="section">
+      <div class="section-title">ציר זמן</div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-year">1919</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>לידה - ביום כיפור</strong><span class="place">סאטו מארה, רומניה</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1925-1933</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>לימודים - 8 כיתות בבית ספר גויים</strong><span class="place">אנטישמיות גלויה - ציונים נמוכים ליהודים</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1938</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>כיבוש הונגרי - המאפייה הופקעה</strong><span class="place">אסרו עליהם לצאת לרחוב. חיו בפחד יומיומי</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1940</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>האחים גויסו לעבודות כפייה באוקראינה</strong><span class="place">יואל, אלכס, ובעלי האחיות - חלקם לא חזרו</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">פסח 1944</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>גירוש לגטו ברקוב ← גטו סטמר</strong><span class="place">כל המשפחה יחד. "חשבנו שמכאן כבר לא הולכים לאף מקום"</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">יוני 1944</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>אושוויץ-בירקנאו</strong><span class="place">ניפרדה מהאם ומהאב לעד. שלוש פעמים ליד הקרמטוריום - וניצלה</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1944-1945</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>ברגן-בלזן - חולה קשות</strong><span class="place">אחותה דינה טיפלה בה ושמרה על חייה</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">אפריל 1945</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>שחרור ע"י הבריטים</strong><span class="place">הושלכה בין הגוויות - דינה הצילה אותה. 5 חודשי אשפוז בגרמניה</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1945</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>חזרה לסאטו מארה - איחוד המשפחה</strong><span class="place">מצאה: יואל, אלכס, דינה, מרים, קתרינה, אריה, ראובן</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1945</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>נישאה לבליק בן-לביא</strong><span class="place">בתנאי אחד: "אם תבוא איתי לישראל - נתחתן"</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1945-1947</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>מסע לישראל: רומניה ← הונגריה ← איטליה</strong><span class="place">ברגל, ברכבת מחתרת ובאמבולנס. ישבה באיטליה עד 1948</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1948</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>יוסי נולד - אוגוסט 1948</strong><span class="place">איטליה</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1948</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>עלייה לישראל - ספינת פליטים לחיפה</strong><span class="place">עם יוסי בן 3 חודשים. התיישבו ליד רחובות בבית ערבי נטוש</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1997</div>
+          <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-text"><strong>מסרה עדות</strong><span class="place">ישראל, גיל 78</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- STORY SUMMARY -->
+    <div class="section">
+      <div class="section-title">סיפור חייה - עדות</div>
+
+      <div class="story-chapter">
+        <div class="chapter-title">1. ילדות ובית המשפחה - סאטו מארה, 1919</div>
+        <p>אירנה יורוביץ' נולדה ביום כיפור 1919 בעיר <strong>סאטו מארה</strong>, רומניה. אביה אהרן היה בבית הכנסת כשנולדה; כשחזר בערב - "השמחה הייתה גדולה, שעוד גדולה." היא הייתה הילדה השישית. לאחר מכן נולדו עוד: דינה, מרים, קתרינה, אריה, ראובן - ובסך הכל 11 ילדים בבית.</p>
+        <p>הבית היה גדול - שישה חדרים ואכסדרה ארוכה. סבא גר בסמוך, בבית שנבנה בשבילו בחצר. האב אהרן היה תלמיד חכם שלא הפסיק ללמוד; האמא ליה ניהלה את המאפייה המשפחתית, גידלה ילדים ונכדים, ולא נחה לרגע. <em>"אמא שאין בעולם - לא בגלל שאמא שלי. היא הייתה בכל מקום."</em></p>
+        <p>המאפייה העסיקה ארבעה-חמישה פועלים, בנוסף לילדים שעזרו. לכל ילד היה תפקיד - אחד בדלפק, אחת במאפייה. <em>"כמו שיפה יש כל כך הרבה ילדים ובנות - כל אחד ידע את התפקיד שלו."</em></p>
+        <p><strong>השבת</strong> הייתה שיא השבוע. בבוקר הכין האב קפה לילדים, ויצא עם הבנים לבית הכנסת. הבנות נשארו עם האמא - <em>"זה היה כמו ועידה. כביבת ככה היינו עם אמא. מה שהיה בכל השבוע - זה הכל סיפרנו לאמא."</em> כשאבא חזר, ישבו כולם לקידוש - <em>"אסור היה לא להיות בקידוש."</em> אחר כך לימד האב את הבנים את פרשת השבוע, וגם לבנות היה תפקיד. בצאת שבת, אם ילדים איחרו, האמא פתחה את חלון הסלון ונתנה להם להיכנס דרכו - כדי שיספיקו לאבדלה. <em>"אמא בשבת הייתה חברה."</em></p>
+      </div>
+
+      <div class="story-chapter">
+        <div class="chapter-title">2. בית הספר והאנטישמיות - "גדלנו עם הפחד"</div>
+        <p>למדה שמונה כיתות בבית ספר גויים - כי בית ספר יהודי לא היה בעיר. התלמידים היהודים היו טובים יותר, אבל תמיד קיבלו ציונים נמוכים יותר. מורה אחת אמרה לה ישירות: <em>"מגיע לך יותר, אבל אסור לי לתת לך את הציון שאני נותנת למריה."</em></p>
+        <p>בגיל תשע שאלה חברה גויה למה אינם משחקים יחד. התשובה: "בגלל שאתם יהודים." בלהה הרגישה פער גדול - התחילה לקרוא לעצמה "מריה", כי לא רצתה לשחק במשחקים שלהם. <em>"ראיתי שזה לא בשבילי."</em></p>
+        <p>האחים הקטנים חזרו הביתה מוכים מדי יום. <em>"היינו מפחדים להיות בינינו - בתוך המשפחה."</em> לאחר כיתה ח' לא נמצא בית ספר שיקבל יהודים. האב ניסה למצוא מורה פרטי, אבל אף אחד לא העז לבוא ללמד בבית יהודים. בלהה נשארה בבית ועזרה. הייתה חברה בבני עקיבא - ובערבים, אמא או אבא היו באים ללוות אותם הביתה. <em>"כי היה פחד לחזור לבד."</em></p>
+      </div>
+
+      <div class="story-chapter">
+        <div class="chapter-title">3. הכיבוש ההונגרי - כלואים בבית, 1938-1944</div>
+        <p>עם כניסת ההונגרים לאזור, נשתנו החיים מהיסוד. גירשו את הפועלים מהמאפייה, ואחר כך גירשו את האב עצמו. <em>"אסור היה לנו ללכת אפילו בשביל שמהבית למאפייה."</em> החיילים ההונגרים הרביצו ברחוב - לאב, לאחים, לכולם. יום אחד חזר האב הביתה כשזקנו גלוח בכפייה על ידי החיילים. החליט להתפלל בבית בלבד.</p>
+        <p>שני האחים הצעירים - יואל ואלכס - נשלחו לעבודות כפייה באוקראינה. בעלי האחיות נשלחו גם הם - חלקם לא חזרו לעולם. מכתבים לא הצליחו לשלוח בדואר - <em>"בדואר לא קיבלו את המכתב שלנו."</em> כתבו דרך מכרים. האחות מרים כתבה שירים - <em>"עד היום היא כותבת שירים."</em></p>
+        <p>כך עברו כחמש שנים - כלואים בבית, בפחד יומיומי. <em>"כל בוקר קמנו ואמרנו ברוך שעבר. כיוון שחיכינו למכות - כל יום."</em></p>
+      </div>
+
+      <div class="story-chapter">
+        <div class="chapter-title">4. הגטאות - פסח 1944</div>
+        <p>ביום השני של פסח 1944, הגיעו חיילים הונגרים לבית. אמרו: <em>"קחו בגדים ליומיים - אתם חוזרים."</em> אנשים האמינו להם, ונתנו את טבעותיהם ותכשיטיהם כשאמרו שהמחביא יישפט למוות. <em>"ראיתי ארגז מלא עם זהב - כולו מהרחוב שלנו."</em> הוציאו אותם לכביש כמו בהמות, צעדו ברגל כחצי עיר - לגטו.</p>
+        <p><strong>גטו ברקוב</strong> - בית חרושת לבלוקים, חצר סגורה. ישנו על הרצפה, רגליים בין אנשים. אוכל: מרק סלק דליל בצהריים, חתיכת לחם ליומיים. לאחר כשבוע - הסיעו אותם בעגלות לגטו הגדול של סטמר.</p>
+        <p><strong>גטו סטמר</strong> - בתי היהודים הגדולים, בית הספר ובית הכנסת של העיר. מכל האזור הובאו יהודים, ופגשו קרובים וחברים שלא ראו שנים. <em>"היה שמחה גדולה שפגשנו קרובים. חשבנו - מכאן כבר לא הולכים לאף מקום."</em> חברות לא-יהודיות זרקו בגדים ומזון מעבר לגדר. האב המשיך להתפלל בחשאי - בני המשפחה הקיפו אותו, הסתכלו שלא יגיע חייל. <em>"ההונגרים היו יותר גרועים מהגרמנים - הם לא הסתכלו אם מרביצים לילדה או לזקן."</em></p>
+      </div>
+
+      <div class="story-chapter">
+        <div class="chapter-title">5. אושוויץ-בירקנאו - קיץ 1944</div>
+        <p>העמיסו אותם לקרונות בהמה - מאה אנשים בקרון. יומיים בלי מים, ילדים בוכים, בלי אפשרות לצאת לשירותים. <em>"לא ראיתי בחיים שלי שיהיה כל כך דחוס."</em> כשהגיעו לאושוויץ, בלהה קפצה מהרכבת ופנתה ישירות למנגלה: <em>"תגיד - מותר לעזור? יש כאן הרבה ילדים חולים."</em> הוא ענה ופנה - ואירנה חזרה אל אמא ואחיותיה.</p>
+        <p>הסלקציה: שלוש שורות - מבוגרים, נשים, ילדים. ניסו שלוש פעמים לעמוד ליד האמא, ובכל פעם ענו להן: <em>"אתם תהיו ביחד עם אמא."</em> הדרך מהרכבת לאושוויץ הייתה כחמישה קילומטרים. <em>"כל הזמן הסתכלנו לאחור - לראות שאמא באה. וראינו את שמלתה, שהרוח תמיד ארפה אותה החוצה. היה לנו טוב שאמא באה איתנו."</em> בהגיעם - שמו אותם בשורה, ואמא לא הייתה שם. לא ראתה אותה עוד לעולם. האב והאחים - ראתה אותם בשלט הכניסה, ולא יותר.</p>
+        <p>ראשים גולחו - אחות לא הכירה אחות. עובד יהודי ניגש ואמר: <em>"פגשתי את אמא."</em> כולן קפצו - <em>"איפה? איפה פגשת?"</em> הוא הצביע החוצה - <em>"תסתכלו: הזקנות שם, שרפו אותן."</em> ואנחנו ידענו - זה הסוף.</p>
+        <p>מנגלה ניסה להפריד בין ארבע האחיות שתיים-שתיים. <em>"לא רצינו. לא הייינו מסכימות."</em> רצו אחריהן. SS הכה את דינה בכל הדרך. ובכל זאת - רצו עד קצה המחנה.</p>
+        <p><strong>שלוש פעמים ליד הקרמטוריום:</strong><br>
+        <em>פעם ראשונה</em> - נכנסו בטעות לפח אשפה של הקרמטוריום כדי להגיע לאחיותיהן. עובד יהודי ב"זונדרקומנדו" מצא אותן: <em>"ילדות - אתן בקרמטוריום. או שאני זורק אתכן לשם, או שאני מחביא אתכן בעגלת הזבל שחוזרת."</em> הסתיר אותן בפח ושלח אותן חזרה. <em>"שם זה הקרמטוריום - וכאן, הפרחים היפים - זה הגבול."</em><br>
+        <em>פעם שנייה</em> - הלכו ל"מקלחות" שהיו גז. מנגלה ספר כמה אפשר להכניס בפעם - הן היו בקצה, דחפו אותן חזרה. כל החברות שנכנסו לפניהן - לא חזרו.<br>
+        <em>פעם שלישית</em> - בשבת נובמבר 1944, שמעו פיצוץ גדול (מרד הזונדרקומנדו). כולם פרצו לכל הכיוונים. ה-SS פתח באש. <em>"רצנו ולא ידענו לאיזה כיוון."</em> ראתה שגדר החשמל כבויה - הלכו עד שהגיעו לרכבת.</p>
+        <p><em>"שלוש פעמים חייתי בקרמטוריום - ובכל זאת. הרצון שלנו היה יותר חזק ממה שהם רצו לעשות איתנו."</em></p>
+        <p>בנובמבר 1944 הועברה ברכבת, עם דינה בלבד, למחנה <strong>גרוס-רוזן</strong> - שם חייבו אותן לצפות בתליות כל בוקר בשלוש-ארבע לפנות בוקר. לאחר כשלושה-ארבעה חודשים - הסיעו לברגן-בלזן.</p>
+      </div>
+
+      <div class="story-chapter">
+        <div class="chapter-title">6. ברגן-בלזן - "לא הכרנו שזה חיים"</div>
+        <p>הרכבת לברגן-בלזן הופצצה בדרך - רבים מתו. ברגן-בלזן היה מחנה צבאי בריטי לשעבר - ארבעה פחים כקירות, יכלו לשכב על מיטות עץ. <em>"ידענו שזה כנראה סוף המלחמה."</em> מי שגידלה גינה וטיפחה עצים - קיבלה חתיכת לחם נוספת כפרס.</p>
+        <p>בלהה חלתה קשות. דינה טיפלה בה ביד אחת ועבדה ליד הקרמטוריום בשנייה - כדי להשיג לחם. <em>"הייתי כל כך חולה שלא יכולתי לאכול."</em> דינה שמה את הלחם במים מלוכלכים ואמרה: <em>"זה קפה."</em></p>
+        <p>ב-15 באפריל 1945 הגיעו הבריטים. ה-SS, שרצו להסתיר את מספר המתים, זרקו את בלהה בין הגוויות - חשבו שמתה. דינה ראתה, ניגשה לחייל בריטי ובכתה. הוא שאל בגרמנית למה היא בוכה. <em>"אנחנו היינו עשרה ילדים - האחות שלי עוד לא מתה."</em> החייל הלך, ראה שאירנה עוד נושמת - והביאוה לבית חולים. אושפזה כארבעה-חמישה חודשים.</p>
+        <p>בהחלמתה, יצאה לטיול עם דינה ומצאה לוח זיכרון לנופלים - ועליו: <em>"עירנה יורוביץ' - מתה בברגן-בלזן."</em> דינה סירבה לקבל. הלכה לרשויות, הביאה שלוש עדויות מאנשי עירן - והשם נמחק. <em>"לפני שאנחנו באנו - כבר באנו לקבר שלי."</em></p>
+      </div>
+
+      <div class="story-chapter">
+        <div class="chapter-title">7. שיבה לסאטו מארה - "זה לא חיים"</div>
+        <p>יצאה מהמחנה ב-20 באפריל 1945. נסעה ברכבת דרך פראג - ושם, על הרציף, פגשה את אחיה אלכס לבוש במדי רוסים. לא הכירה אותו. הוא הכריז: <em>"אני בן של אהרן יורוביץ' - את הבת שלה?"</em> לאט לאט הכירו שזה אחיהן. <em>"הוא לבש מדים רוסים כדי לעבור גבולות ולמצוא אותנו."</em></p>
+        <p>חזרו לסאטו מארה. בבית כבר ישבו: יואל, מרים וקתרינה שהגיעו מתרזיינשטט. עשו נדר - לחכות לכולם. אריה נמצא במחנה - יואל יצא על אופנוע, מצא אותו ולקח לבית חולים יהודי בבודפשט. הוא היה חולה מאוד. פעם אחת עמד ליד חלון בקומה השלישית וצעק: <em>"תראו - אמא ואבא!"</em> ונפל מהחלון. ניצל בנס.</p>
+        <p>ישנו ועמדו משינה בצרחות - חלמו שבאים לקחת אותם שוב. <em>"עד שהגענו לחיים נורמליים."</em> אירנה אמרה לאחיה: <em>"זה לא חיים. אנחנו עושים דרך החלון, דרך הדלת - זה לא חיים. יש לכל אחד כאן בית. אנחנו רוצים להתחיל חיים נורמליים ביחד."</em> האחים והאחיות התחתנו בזה אחר זה, כל אחד פתח בית משלו.</p>
+      </div>
+
+      <div class="story-chapter">
+        <div class="chapter-title">8. נישואין ובריחה לישראל - 1945-1948</div>
+        <p>ב-1945 נישאה ל<strong>מנחם (בליק) בן-לביא</strong>. אמרה לו: <em>"אני מתחתנת איתך בתנאי אחד - שתבוא איתי לישראל."</em> קודם דאגה לשלוח את שלושת אחיותיה הקטנות לארץ ישראל. כשידעה שהגיעו בשלום - יצאה.</p>
+        <p>ברחו לילה בלילה - עברו את הגבול רומניה-הונגריה ברגל, לבושה כגויה. <em>"לא לדבר מילה, לא לשבת ליד אף חייל."</em> אוטובוס של ארבע בבוקר לבודפשט. שם גרו חצי שנה בבית חבר. <em>"אמרתי לבעלי: לא באנו לחלונות יפים - באנו למטרה. בוא נמשיך."</em> משם - באמבולנס לאיטליה. <em>"איטליה הייתה מאוד יפה, קיבלו אותנו יפה."</em> גרו שם עד 1948.</p>
+        <p>בנם <strong>יוסי</strong> נולד באוגוסט 1948 באיטליה. כשהיה בן שלושה חודשים - עלו על ספינת פליטים מנפולי לחיפה.</p>
+      </div>
+
+      <div class="story-chapter">
+        <div class="chapter-title">9. עלייה לישראל וחיים חדשים - 1948 ואילך</div>
+        <p>הספינה הגיעה לחיפה בנובמבר 1948. <em>"כשהגעתי לחיפה - לא אכפת לי שום דבר. המטרה הושגה."</em> קיבלו בית ערבי נטוש ליד רחובות - עשב עד השמיים, קוצים בכל מקום. ניקו, עיבדו, הפכו אותו לבית. <em>"היה לנו בית בארץ ישראל, היה לנו ילד בארץ ישראל - מה היה עוד חסר?"</em></p>
+        <p>בתם <strong>לאה</strong> נולדה ב-1950. גרו שבע שנים ליד רחובות, ואחר כך עברו ל<strong>כפר הרוא"ה</strong>, מושב דתי - <em>"כדי שהילדים יגדלו עם חינוך טוב."</em> גרו שם עשרים שנה. מנחם נפטר ב-1973. לאחר פטירתו עברה לנתיבות, קרוב ללאה.</p>
+        <p>בזמן הראיון (1997) - שמונה נכדים: חמישה ללאה (נצר, שקד, נחום, פרי, אליה) ושלושה ליוסי. <em>"סבתא - חיים ראינו כל כך טוב. תמיד טוב לבוא הביתה לאמא."</em></p>
+        <p>לשאלה: "מה עזר לך לשרוד?" ענתה: <em>"אני תמיד מסתכלת על החיים שלי. היה לי מאוד טוב - חוץ מזה שהיה גדול, עד שהייתי עם ההורים. חוץ מזה - לא יכולה להתלונן על שום דבר."</em></p>
+      </div>
+
+    </div>
+
+
+  </div><!-- /body -->
+
+  <div class="footer">
+    <span>תמלול: Whisper AI מתוך קובץ וידאו | שפה: עברית עם מבטא הונגרי</span>
+    <span>חלק מהפרטים מוערכים בשל איכות הצליל</span>
+  </div>
+
+</div>
+</body>
+</html>
